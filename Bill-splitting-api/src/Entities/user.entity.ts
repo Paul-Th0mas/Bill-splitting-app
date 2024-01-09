@@ -17,11 +17,15 @@ export class User {
   @Column()
   firstName: string;
 
+
   @Column()
   lastName: string;
 
   @Column()
   email: string;
+
+  @Column({ nullable: true })
+  phoneNumber?: string
 
   @Column()
   password: string;

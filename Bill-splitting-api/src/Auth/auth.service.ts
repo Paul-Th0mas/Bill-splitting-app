@@ -5,6 +5,7 @@ import { DataSource, Repository } from 'typeorm';
 import { EncryptService } from './encrypt.service';
 import { JwtService } from '@nestjs/jwt';
 import { SignUpDto } from './Dto/signUp.Dto';
+import { log } from 'console';
 
 @Injectable({})
 export class AuthService {
@@ -15,20 +16,22 @@ export class AuthService {
     private jwtService: JwtService,
   ) { }
   signUp = async (signUpDetails: SignUpDto) => {
-    const doesUserExist = await this.usersRepository.exist({
-      where: { email: signUpDetails.email },
-    });
-    if (doesUserExist) {
-      return { status: 204, message: 'User already exist' };
-    } else {
-      console.log(signUpDetails);
-      signUpDetails.password = await this.encryptService.EncryptPassword(
-        signUpDetails.password,
-      );
-      const newUser = this.usersRepository.create(signUpDetails);
-      this.usersRepository.save(newUser);
-      return { status: 200, message: 'User is created' };
-    }
+
+    try {
+      const doesUserExist = await this.usersRepository.exist({
+        where: { email: signUpDetails.email },
+      });
+      if (doesUserExist) {
+        return { status: 204, message: 'User already exist' };
+      } else {
+        signUpDetails.password = await this.encryptService.EncryptPassword(
+          signUpDetails.password,
+        );
+        const newUser = this.usersRepository.create(signUpDetails);
+        this.usersRepository.save(newUser);
+        return { status: 200, message: 'User is created' };
+      }
+    } catch (err) { console.log(err) }
   };
 
   login = async (email: string, password: string) => {

@@ -5,7 +5,7 @@ export class CreateTransaction {
   CurrencyTypeId: number;
   PaidBy: number;
   CreatedBy: number;
-  CreatedOn: number;
+  CreatedOn: Date;
   IsActive: boolean;
 }
 

@@ -6,6 +6,7 @@ import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Login from "./Screens/Login.tsx";
 import { AuthProvider } from "./context/AuthProvider.tsx";
+import TransactionScreen from "./Screens/TransactionScreen.tsx";
 
 const router = createBrowserRouter([
   {
@@ -14,8 +15,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-
     element: <Login />,
+  },
+  {
+    path: "/AddNewTransaction",
+    element: <TransactionScreen />,
   },
 ]);
 ReactDOM.createRoot(document.getElementById("root")!).render(

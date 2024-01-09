@@ -22,7 +22,7 @@ import { TransactionModule } from './Transaction/transaction.module';
       username: 'postgres',
       password: 'admin',
       database: 'Billing_App',
-      entities: [User, Transaction, SubTransaction, Group, GroupUser],
+      entities: [User,File, Transaction, SubTransaction, Group, GroupUser,File],
       synchronize: true,
     }),
     UserModule,

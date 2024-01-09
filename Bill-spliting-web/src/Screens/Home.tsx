@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import Table from "../components/Table";
+import { Chart } from "react-chartjs-2";
+import { useEffect, useRef, useState } from "react";
 
 const Home = () => {
     const headers = ['ID', 'Name', 'Age'];
+    const chartRef = useRef(null);
     const rows = [
         { ID: 1, Name: 'Alice', Age: 25 },
         { ID: 2, Name: 'Bob', Age: 30 },
@@ -14,6 +17,24 @@ const Home = () => {
         { Link: "My Dashboard", url: "" },
         { Link: "My Groups", url: "group" }
     ]
+
+
+    const [chartData, setChartData] = useState({
+        datasets: [],
+    });
+
+    useEffect(() => {
+        const chart = chartRef.current;
+
+        if (chart) {
+            setChartData({
+                datasets: [{
+                    backgroundColor: createBackgroundGradient(chart.ctx),
+                    // ...
+                }]
+            });
+        }
+    }, []);
 
     return (<>
         <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
@@ -106,7 +127,7 @@ const Home = () => {
                                 })}
                             </ul>
 
-                            <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
+                            {/* <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
                                 <span>Saved reports</span>
                                 <a className="link-secondary" href="https://getbootstrap.com/docs/5.3/examples/dashboard/#" aria-label="Add a new report">
                                 </a>
@@ -132,7 +153,7 @@ const Home = () => {
                                         Year-end sale
                                     </a>
                                 </li>
-                            </ul>
+                            </ul> */}
 
                             <hr className="my-3" />
 
@@ -171,7 +192,9 @@ const Home = () => {
                         boxSizing: 'border-box',
                         height: '424px',
                         width: '1004px'
-                    }}></canvas>
+                    }}>
+                        <Chart ref={chartRef} type='line' data={chartData} />
+                    </canvas>
 
                     <h2>Section title</h2>
                     <Table headers={headers} rows={rows} />

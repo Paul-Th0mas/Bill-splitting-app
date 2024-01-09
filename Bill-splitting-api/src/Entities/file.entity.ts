@@ -13,3 +13,4 @@ class file {
     })
     data: Uint8Array;
 }
+export default file

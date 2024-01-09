@@ -8,7 +8,7 @@ import TransactionScreen from './Screens/TransactionScreen'
 function App() {
 
   return (
-    <TransactionScreen />
+    <Home />
   )
 }
 

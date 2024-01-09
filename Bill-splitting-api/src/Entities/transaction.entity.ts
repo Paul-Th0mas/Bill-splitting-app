@@ -28,18 +28,10 @@ export class Transaction {
   @Column()
   CreatedBy: number;
   @Column()
-  CreatedOn: number;
+  CreatedOn: Date;
   @Column()
   IsActive: boolean;
 
-  @JoinColumn({ name: 'fileId' })
-  @OneToOne(
-    () => File,
-    {
-      nullable: true
-    }
-  )
-  public avatar?: File;
 
   @Column({ nullable: true })
   public fileId?: number;
