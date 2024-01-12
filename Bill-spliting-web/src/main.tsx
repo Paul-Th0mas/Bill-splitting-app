@@ -7,11 +7,23 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Login from "./Screens/Login.tsx";
 import { AuthProvider } from "./context/AuthProvider.tsx";
 import TransactionScreen from "./Screens/TransactionScreen.tsx";
+import Dashboard from "./Screens/Dashboard.tsx";
+import GroupScreen from "./Screens/Group.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    children: [
+      {
+        path: "Dashboard",
+        element: <Dashboard />
+      },
+      {
+        path: "Groups",
+        element: <GroupScreen />
+      }
+    ]
   },
   {
     path: "/login",

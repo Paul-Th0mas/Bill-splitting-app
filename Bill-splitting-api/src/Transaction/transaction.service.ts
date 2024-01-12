@@ -45,7 +45,6 @@ export class TransactionService {
   ) => {
     const subTransactionsPromises = debitors.map(async (debitor) => {
       const subTransaction: CreateSubTransactionDto = {
-        
         BaseTransaction: transaction.id,
         Credit: transaction.TotalPaid / debitors.length,
         Creditor: transaction.PaidBy,
